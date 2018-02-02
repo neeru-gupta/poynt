@@ -230,6 +230,7 @@ public class TransactionReceiver extends BroadcastReceiver {
 
                     } else {
                         getBusinessDetails(context, AppController.getInstance().getTransaction());
+                         phone = Utils.replaceAllAlpha(phone);
                         AppController.getInstance().setPhoneNumber(phone);
                         showWelcomeScreen();
 

@@ -83,6 +83,7 @@ import co.poynt.api.model.OrderItemTax;
 import co.poynt.api.model.Phone;
 import co.poynt.api.model.PhoneType;
 import co.poynt.api.model.Transaction;
+import co.poynt.api.model.UnitOfMeasure;
 import co.poynt.os.model.PoyntError;
 import co.poynt.os.services.v1.IPoyntProductCatalogListener;
 import co.poynt.os.services.v1.IPoyntProductListener;
@@ -109,15 +110,15 @@ public class Utils {
                 AppController.getInstance().setProduct(product);
 
                 OrderItem orderItem = AppController.getInstance().orderItem_Product_HashMap.get(product.getSku()).getOrder().getOrderItems().get(Counter);
-                orderItem.getProduct().setManufacturer(getAttributeValueReplaceNull2Empty(product.getManufacturer()));
-                //orderItem.getProduct().setCategory(getCategory(product.getId()));
+                //orderItem.getProduct().setManufacturer(getAttributeValueReplaceNull2Empty(product.getManufacturer()));
+                orderItem.getProduct().setCategory(getCategory(product.getId()));
                 ImageUrl imageUrl = new ImageUrl();
                 if (product.getImageUrl().size() > 0)
                     imageUrl.setHref(getAttributeValueReplaceNull2Empty(product.getImageUrl().get(0)));
                 else
                     imageUrl.setHref("");
 
-                orderItem.getProduct().setImageUrl(imageUrl);
+                // orderItem.getProduct().setImageUrl(imageUrl);
 
                 ProductIdentifier productIdentifier = new ProductIdentifier();
 
@@ -129,14 +130,14 @@ public class Utils {
 
                 List<String> brands = new ArrayList<>();
                 brands.add(getAttributeValueReplaceNull2Empty(product.getBrand()));
-                orderItem.getProduct().setBrands(brands);
+                // orderItem.getProduct().setBrands(brands);
                 orderItem.getProduct().setDescription(getAttributeValueReplaceNull2Empty(product.getDescription()));
                 LogoUrl logoUrl = new LogoUrl();
                 logoUrl.setHref("");
-                orderItem.getProduct().setLogoUrl(logoUrl);
+                //  orderItem.getProduct().setLogoUrl(logoUrl);
                 Url url = new Url();
                 url.setHref("");
-                orderItem.getProduct().setUrl(url);
+                //  orderItem.getProduct().setUrl(url);
 
 
                 Counter = Counter + 1;
@@ -317,7 +318,7 @@ public class Utils {
         productOrder.getOrder().setTotal(total_);
 
         // productOrder.getOrder().setOrderProperties(orderProperties);
-        productOrder.getOrder().setStatus("IN_PROCESS");
+        productOrder.getOrder().setStatus(Constants.ORDER_STATUS);
         productOrder.getOrder().setCustomer(new com.renovite.transactionidmapper.model.Customer());
         List<PaymentMethod> paymentMethodsAList = new ArrayList<>();
         PaymentMethod paymentMethod = new PaymentMethod();
@@ -375,7 +376,7 @@ public class Utils {
             paymentMethod.getCard().setLastFour(getAttributeValueReplaceNull2Empty(transaction.getFundingSource().getCard().getNumberLast4()));
             paymentMethod.getCard().setCardType(getAttributeValueReplaceNull2Empty(transaction.getFundingSource().getCard().getType().toString()));
             paymentMethod.getCard().setExpirationDate(getAttributeValueReplaceNull2Empty(String.valueOf(transaction.getFundingSource().getCard().getExpirationMonth())) + getAttributeValueReplaceNull2Empty(String.valueOf((Math.abs(transaction.getFundingSource().getCard().getExpirationYear()) % 10))));
-            paymentMethod.setPaymentMethod(Constants.CARD);
+            paymentMethod.setPaymentMethod(Constants.CARD.toLowerCase());
             paymentMethod.setPaymentMethodType(Constants.CARD.toUpperCase());
         }
         if (transaction.getFundingSource().getType().equals(FundingSourceType.CASH)) {
@@ -385,7 +386,7 @@ public class Utils {
                     cash.setPurchaseOrderNumber(poyntOrder.getOrderNumber());
 
             paymentMethod.setCash(cash);
-            paymentMethod.setPaymentMethod(Constants.CASH);
+            paymentMethod.setPaymentMethod(Constants.CASH.toLowerCase());
             paymentMethod.setPaymentMethodType(Constants.CASH.toUpperCase());
 
         }
@@ -396,7 +397,7 @@ public class Utils {
                     other.setPurchaseOrderNumber(poyntOrder.getOrderNumber());
 
             paymentMethod.setOther(other);
-            paymentMethod.setPaymentMethod(Constants.OTHER);
+            paymentMethod.setPaymentMethod(Constants.OTHER.toLowerCase());
             paymentMethod.setPaymentMethodType(Constants.OTHER.toUpperCase());
         }
 
@@ -444,7 +445,8 @@ public class Utils {
 
 //            if (poyntOrder.getDiscounts() != null) {
 //                productOrder.getOrder().setDiscounts(getDiscounts(poyntOrder.getDiscounts(), transaction));
-//            } else
+//            }
+//            else
 //                productOrder.getOrder().setDiscounts(new ArrayList<com.renovite.transactionidmapper.model.Discount>());
 
             productOrder.getOrder().setOrderItems(getOrderItems(poyntOrder.getItems(), transaction));
@@ -511,9 +513,11 @@ public class Utils {
         List<Optin> optins = new ArrayList<>();
 
         Optin optin = new Optin();
-        optin.setChannel("");
-        optin.setEnabled(false);
-        optin.setFeature("");
+        optin.setChannel(Constants.OPTIN_CHANNEL);
+
+        optin.setEnabled(true);
+        //  optin.setPrdoduct("RECEIPTS")  need to create the  field TODO
+        // optin.setFeature("");
         optins.add(optin);
 
 
@@ -528,7 +532,7 @@ public class Utils {
         destination.setPostalCode("110033");
 
         destination.setStreetLines(new ArrayList<String>());
-        billingAddress.setRegion("California");
+
         shipment.setCarrier("");
         shipment.setDestination(destination);
         shipment.setExpectedFrom("");
@@ -545,7 +549,7 @@ public class Utils {
         Store_Address store_address = new Store_Address();
         store.setAddress(store_address);
         store.getAddress().setCountry(poyntStore.getAddress().getCountryCode());
-        store.getAddress().setRegion("California");
+        store.getAddress().setRegion(poyntStore.getAddress().getTerritory());
         store.getAddress().setLocality(poyntStore.getAddress().getCity() + " " + poyntStore.getAddress().getLine1());
         store.getAddress().setPostalCode(poyntStore.getAddress().getPostalCode());
 
@@ -554,20 +558,20 @@ public class Utils {
         store.setStoreRef(poyntStore.getId().toString());
 
 
-        productOrder.getOrder().setBillingAddress(billingAddress);
+        // productOrder.getOrder().setBillingAddress(billingAddress);
         productOrder.getOrder().setStore(store);
         productOrder.getOrder().setOptins(optins);
 
-        productOrder.getOrder().setIsGift(false);
-        productOrder.getOrder().setOrderType("IN_STORE");
-        productOrder.getOrder().setDelivery(delivery);
-        productOrder.getOrder().setConfirmationNumber("");
+        //productOrder.getOrder().setIsGift(false);
+        productOrder.getOrder().setOrderType(Constants.ORDER_TYPE);
+        // productOrder.getOrder().setDelivery(delivery);
+        //.getOrder().setConfirmationNumber("");
 
 
         // I use here transaction date not order date because some cases there are no order
         productOrder.getOrder().setOrderDate(millisecondsToDateTime(transaction.getCreatedAt().getTimeInMillis()));
 
-        productOrder.getOrder().setShipment(shipment);
+        //productOrder.getOrder().setShipment(shipment);
 
     }
 
@@ -624,7 +628,7 @@ public class Utils {
                 ItemDiscount discount = new ItemDiscount();
                 DiscountAmount_ discountAmount = new DiscountAmount_();
                 discountAmount.setCurrency(transaction.getAmounts().getCurrency());
-                discountAmount.setQuantity(object.getAmount());
+                discountAmount.setQuantity(Utils.appendDecimal(object.getAmount()));
                 discount.setDiscountAmount(discountAmount);
                 // Here may be preccesor.
                 discount.setDiscountName(object.getCustomName());
@@ -632,6 +636,15 @@ public class Utils {
             }
         }
         return list;
+    }
+
+    private static String getUnitOfMesure(UnitOfMeasure unitOfMeasure) {
+        if (unitOfMeasure.equals(UnitOfMeasure.FOOT)) {
+            return Constants.FEET;
+        } else if (unitOfMeasure.equals(UnitOfMeasure.POUND) || unitOfMeasure.equals(UnitOfMeasure.INCH) || unitOfMeasure.equals(UnitOfMeasure.GALLON) || unitOfMeasure.equals(UnitOfMeasure.KILOGRAM) || unitOfMeasure.equals(UnitOfMeasure.GRAM) || unitOfMeasure.equals(UnitOfMeasure.LITRE) || unitOfMeasure.equals(UnitOfMeasure.METER) || unitOfMeasure.equals(UnitOfMeasure.MILLIMETER)) {
+            return unitOfMeasure.toString() + "S".toString();
+        } else
+            return Constants.ITEMS;
     }
 
     private static synchronized List<OrderItem> getOrderItems(List<co.poynt.api.model.OrderItem> orderItems, Transaction transaction) {
@@ -648,9 +661,10 @@ public class Utils {
                     Total total = new Total();
 
 
-//                    if (object.getDiscounts() != null) {
-//                        orderItem.setItemDiscounts(getItemDiscounts(object.getDiscounts(), transaction));
-//                    } else
+                    if (object.getDiscounts() != null) {
+                       // orderItem.setItemDiscounts(getItemDiscounts(object.getDiscounts(), transaction));
+                    }
+//                    else
 //                        orderItem.setItemDiscounts(new ArrayList<ItemDiscount>());
 
 
@@ -661,13 +675,13 @@ public class Utils {
 
                     // quantity
                     quantity.setQuantity(object.getQuantity());
-                    quantity.setUnits(object.getUnitOfMeasure().toString());
-                    quantity.setUnits("KILOGRAMS");
+                    //  quantity.setUnits(object.getUnitOfMeasure().toString());
+                    quantity.setUnits(getUnitOfMesure(object.getUnitOfMeasure()));
                     orderItem.setQuantity(quantity);
 
 
                     if (object.getTaxes() != null)
-                        orderItem.setTaxes(getOrderItemTaxes(object.getTaxes(), transaction, object.getUnitPrice()));
+                        orderItem.setTaxes(getOrderItemTaxes(object.getTaxes(), transaction, object.getUnitPrice(),object.getQuantity()));
                     else
                         object.setTaxes(new ArrayList<OrderItemTax>());
 
@@ -704,17 +718,18 @@ public class Utils {
 
     }
 
-    private static Float getTaxRate(Long amount, Long taxAmount) {
+    private static Float getTaxRate(Long amount, Long taxAmount,Float units) {
         Math.abs(taxAmount * 100.0 / amount);
 
-        float percentage = (float) (taxAmount * 100.0 / amount);
+        // As Suggested by Rishi  divide by 100
+        float percentage = (float) ((taxAmount * 100.0 / (amount*units))/100);
 
         return percentage;
 
 
     }
 
-    private static List<com.renovite.transactionidmapper.model.Tax> getOrderItemTaxes(List<OrderItemTax> entry, Transaction transaction, Long unitPrice) {
+    private static List<com.renovite.transactionidmapper.model.Tax> getOrderItemTaxes(List<OrderItemTax> entry, Transaction transaction, Long unitPrice,Float units) {
         List<com.renovite.transactionidmapper.model.Tax> list = new ArrayList();
         for (OrderItemTax object : entry) {
             if (object != null) {
@@ -722,8 +737,8 @@ public class Utils {
                 tax.setAmount(new Amount());
                 tax.getAmount().setQuantity(Utils.appendDecimal(object.getAmount()));
                 tax.getAmount().setCurrency(transaction.getAmounts().getCurrency());
-                tax.setTaxType("REGION");
-                tax.setRate(getTaxRate(unitPrice, object.getAmount()));
+                tax.setTaxType(Constants.TAX_TYPE);
+                tax.setRate(getTaxRate(unitPrice, object.getAmount(),units));
 
                 list.add(tax);
             }
