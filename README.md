@@ -5,7 +5,7 @@
   For Poynt Development Details : http://poynt.github.io/developer/overview/overview.html
   
   
-Build Project 
+# Build Project 
 
 
 1) Install Android Studio with SDK form here : https://developer.android.com/studio/index.html3
@@ -18,18 +18,19 @@ Build Project
 8) After building successful apk at the bottom of screen its shows  (APK Explorer Window) 
 9) Open APK Explorer that having apk file.
 
-Run APK file (Connect to Poynt Device to computer or laptop by USB and allow USB debugging on device screen)
- 
- By Command 
+# Run APK By Command 
+
+(Connect to Poynt Device to computer or laptop by USB and allow USB debugging on device screen)
 
   a) get SDK path File->Project Structure-> SDK Location  
   b) click terminal window at bottom of screen in android studio.
-  c) go to plateform-tools path of SDK (e.g:  `cd C:\Users\AppData\Local\Android\Sdk\platform-tools\` )
+  c) go to platform-tools path of SDK (e.g:  `cd C:\Users\AppData\Local\Android\Sdk\platform-tools\` )
   d) execute following command : `adb install path_of_apk`
   		e.g  `adb install c:\myfolder\poyntdemo.apk`
 
 
- Or Run Directly from Android studio menu option:
+# Run APK By Directly from Android studio menu option:
+
     a) Run->Run APP 
 
 
