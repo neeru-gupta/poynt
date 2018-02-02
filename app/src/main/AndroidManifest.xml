@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.renovite.transactionidmapper">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="co.poynt.orders.ACCESS_ORDERS" />
+    <uses-permission android:name="poynt.permission.ORDER_SERVICE" />
+    <uses-permission android:name="poynt.permission.TOKEN_SERVICE" />
+    <uses-permission android:name="poynt.permission.TRANSACTION_SERVICE" />
+    <uses-permission android:name="poynt.permission.CUSTOMER_SERVICE" />
+    <uses-permission android:name="poynt.permission.PRODUCT_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="poynt.permission.SECOND_SCREEN_SERVICE" />
+    <uses-permission android:name="poynt.permission.RECEIPT_PRINTING_SERVICE" />
+    <uses-permission android:name="poynt.permission.BUSINESS_SERVICE" />
+    <uses-permission android:name="com.poynt.store.BILLING" />
+    <uses-permission android:name="poynt.permission.ACCESSORY_MANAGER" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <application
+        android:name=".activities.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:debuggable="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.TransactionIDMapper"
+            android:excludeFromRecents="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".receviers.TransactionReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="poynt.intent.action.TRANSACTION_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="poynt.intent.action.INSERT_OR_SWIPE_CARD" />
+                 <action android:name="poynt.intent.action.CANCEL_PAYMENT" />
+                 <action android:name="poynt.intent.action.CLOSE_PAYMENT" />
+                 <action android:name="co.poynt.intent.action." />
+                 <action android:name="poynt.intent.action." />
+                 <action android:name="poynt.intent.action.CANCEL_PAYMENT" />
+                 <action android:name="poynt.intent.action.CLOSE_PAYMENT" />
+                 <action android:name="poynt.intent.action.RETRY_PAYMENT" />
+                 <action android:name="poynt.intent.action.PHONE_MODE_GOT_UPDATED" />
+                 <action android:name="poynt.intent.action.PHONE_MODE_OPTIONS" />
+                 <action android:name="PHONE_MODE" />
+                 <action android:name="CARD_INSERTED_NEED_UPDATE_UI" />
+                 <action android:name="CARD_REMOVED_NEED_UPDATE_UI" />
+                 <action android:name="poynt.settings." />
+                 <action android:name="co.poynt.intent.action.LOGIN" />
+                 <action android:name="poynt.intent.action.LOGIN_SUCCESS" />
+                 <action android:name="poynt.intent.action.LOGIN_FAILURE" />
+                 <action android:name="poynt.intent.action.TRANSACTION_SUCCESS" />
+                 <action android:name="poynt.intent.action.TRANSACTION_FAILURE" />
+                 <action android:name="poynt.intent.action.TRANSACTION_CANCELED" />
+                 <action android:name="poynt.intent.action.CARD_READER_NOT_AVAILABLE" />
+                 <action android:name="poynt.intent.action.CARD_READ_ERROR" />
+                 <action android:name="poynt.intent.action.NO_NETWORK" />
+                 <action android:name="poynt.intent.action.BUSINESS_UPDATED" />
+                 <action android:name="android.intent.action.SEARCH" />
+                 <action android:name="poynt.intent.action.IDLE" />
+                 <action android:name="poynt.intent.action.PRESENT_CARD" />
+                 <action android:name="poynt.intent.action.INSERT_CARD" />
+                 <action android:name="poynt.intent.action.PROCESSING_ERROR_SEE_PHONE" />
+                 <action android:name="poynt.intent.action.SWIPE_CARD" />
+                 <action android:name="poynt.intent.action.SWIPE_CARD_FALLBACK" />
+                 <action android:name="poynt.intent.action.INSERT_OR_SWIPE_CARD" />
+                 <action android:name="poynt.intent.action.INSERT_SWIPE_OR_TRY_ANOTHER_CARD" />
+                 <action android:name="poynt.intent.action.PRESENT_CARD_AGAIN" />
+                 <action android:name="poynt.intent.action.TIMEOUT" />
+                 <action android:name="poynt.intent.action.PROCESSING" />
+                 <action android:name="poynt.intent.action.AUTHORIZING" />
+                 <action android:name="poynt.intent.action.REFUNDING" />
+                 <action android:name="poynt.intent.action.VOIDING" />
+                 <action android:name="poynt.intent.action.CARD_READ_SUCCESSFULLY" />
+                 <action android:name="poynt.intent.action.PROCESSING_ERROR_CONTACTLESS_CONDITIONS_NOT_SATISFIED" />
+                 <action android:name="poynt.intent.action.PROCESSING_ERROR_COLLISION" />
+                 <action android:name="poynt.intent.action.PROCESSING_ERROR_SEE_PHONE" />
+                 <action android:name="poynt.intent.action.PROCESSING_ERROR" />
+                 <action android:name="poynt.intent.action.NOT_ACCEPTED" />
+                 <action android:name="poynt.intent.action.CARD_NOT_REMOVED" />
+                 <action android:name="poynt.intent.action.CARD_REMOVED" />
+                 <action android:name="poynt.intent.action.ONLINE_AUTHORIZATION" />
+                 <action android:name="poynt.intent.action.ONLINE_REFUND" />
+                 <action android:name="poynt.intent.action.APPROVED" />
+                 <action android:name="poynt.intent.action.APPROVED_WITH_SIGNATURE" />
+                 <action android:name="poynt.intent.action.DECLINED" />
+                 <action android:name="poynt.intent.action.CANCELLED_POLLING" />
+                 <action android:name="poynt.intent.action.CANCELLED_TRANSACTION" />
+                 <action android:name="poynt.intent.action.CALL_YOUR_BANK" />
+                 <action android:name="poynt.intent.action.NEW_PIN_REQUIRED" />
+                 <action android:name="poynt.intent.action.PIN_ENTRY_REQUIRED" />
+                 <action android:name="poynt.intent.action.PIN_DIGIT_ENTERED" />
+                 <action android:name="poynt.intent.action.PIN_DIGIT_DELETED" />
+                 <action android:name="poynt.intent.action.PIN_CLEARED" />
+                 <action android:name="poynt.intent.action.PIN_CANCELLED" />
+                 <action android:name="poynt.intent.action.PIN_ENTERED" />
+                 <action android:name="poynt.intent.action.PIN_INCORRECT" />
+                 <action android:name="poynt.intent.action.PIN_OK" />
+                 <action android:name="poynt.intent.action.PIN_TIMEOUT" />
+                 <action android:name="poynt.intent.action.CARD_READER_START_REBOOT" />
+                 <action android:name="poynt.intent.action.PAN_ENTRY_REQUIRED" />
+                 <action android:name="poynt.intent.action.CSC_ENTRY_REQUIRED" />
+                 <action android:name="poynt.intent.action.REASON_FOR_CSC_CANCEL_REQUIRED" />
+                 <action android:name="poynt.intent.action.CSC_ENTERED" />
+                 <action android:name="poynt.intent.action.EXPIRY_DATE_REQUIRED" />
+                 <action android:name="poynt.intent.action.CNPJ_REQUIRED" />
+                 <action android:name="poynt.intent.action.CLIENT_CODE_REQUIRED" />
+                 <action android:name="poynt.intent.action.INVOICE_REQUIRED" />
+                 <action android:name="poynt.intent.action.BIRTH_YEAR_REQUIRED" />
+                 <action android:name="poynt.intent.action.BIRTH_MONTH_REQUIRED" />
+                 <action android:name="poynt.intent.action.BIRTH_DAY_REQUIRED" />
+                 <action android:name="poynt.intent.action.CPF_NUMBER_REQUIRED" />
+                 <action android:name="poynt.intent.action.AGE_REQUIRED" />
+                 <action android:name="poynt.intent.action.RG_NUMBER_REQUIRED" />
+                 <action android:name="poynt.intent.action.DIA_VENC_FATURA_REQUIRED" />
+                 <action android:name="poynt.intent.action.ZIP_CODE_RESIDENTIAL_REQUIRED" />
+                 <action android:name="poynt.intent.action.ZIP_CODE_COMMERCIAL_REQUIRED" />
+                 <action android:name="poynt.intent.action.EXPIRY_MONTH_REQUIRED" />
+                 <action android:name="poynt.intent.action.EXPIRY_YEAR_REQUIRED" />
+                 <action android:name="poynt.intent.action.CURRENT_CTA_REQUIRED" />
+                 <action android:name="poynt.intent.action.AGENCY_CODE_REQUIRED" />
+                 <action android:name="poynt.intent.action.PHONE_RESIDENCE_REQUIRED" />
+                 <action android:name="poynt.intent.action.PHONE_WORK_REQUIRED" />
+                 <action android:name="poynt.intent.action.PHONE_CELL_REQUIRED" />
+                 <action android:name="poynt.intent.action.PASSWORD_REQUIRED" />
+                 <action android:name="poynt.intent.action.DIGIT_ENTERED" />
+                 <action android:name="poynt.intent.action.HIDDEN_DIGIT_ENTERED" />
+                 <action android:name="poynt.intent.action.DIGIT_DELETED" />
+                 <action android:name="poynt.intent.action.FIELD_CLEARED" />
+                 <action android:name="poynt.intent.action.FIELD_CANCELLED" />
+                 <action android:name="poynt.intent.action.FIELD_ENTERED" />
+                 <action android:name="poynt.intent.action.FIELD_TOO_SMALL" />
+                 <action android:name="poynt.intent.action.FIELD_INVALID_DATA_FORMAT" />
+                 <action android:name="poynt.intent.action.FIELD_TIMEOUT" />
+                 <action android:name="poynt.intent.action.SWITCH_TO_ADA_SCREEN" />
+                 <action android:name="poynt.intent.action.SWITCH_TO_NORMAL_SCREEN" />
+                 <action android:name="poynt.intent.action.TRANSACTION_APPROVED" />
+                 <action android:name="poynt.intent.action.TRANSACTION_COMPLETED" />
+                 <action android:name="poynt.intent.action.SHOW_RECEIPT_PRINTING_PREFERENCES" />
+                 <action android:name="poynt.intent.action.FIRST_6_PAN_DIGITS_REQUIRED" />
+                 <action android:name="poynt.intent.action.LAST_4_PAN_DIGITS_REQUIRED" />
+                 <action android:name="poynt.intent.action.LAUNCH_SCANNER" />
+                 <action android:name="poynt.intent.action.SCANNER_RESULT" />
+                 <action android:name="poynt.intent.action.DISPLAY_PROCESSOR_MESSAGE" />
+                 <action android:name="poynt.intent.action.CHANGE_LANGUAGE" />
+                 <action android:name="poynt.intent.action.CARD_FOUND" />
+                 <action android:name="poynt.intent.action.CARD_SESSION" />
+                 <action android:name="poynt.intent.action.UNSUCCESSFUL_SWIPE" />
+                 <action android:name="poynt.intent.action.CARD_QUERY" />
+                 <action android:name="poynt.intent.action.PAYPASS_CARD_READ_SUCCESSFULLY" />
+                 <action android:name="poynt.intent.action.TRY_AGAIN" />
+                 <action android:name="poynt.intent.action.CARD_INSERTED_INCORRECTLY_OR_BAD_CARD" />
+                 <action android:name="poynt.intent.action.CARD_NOT_INSERTED_FULLY" />
+                 <action android:name="poynt.intent.action.SWIPE_OUT" />
+                 <action android:name="poynt.intent.action.VIEW_TRANSACTIONS" />
+                 <action android:name="poynt.intent.action.ACCOUNT_LOGIN" />
+                 <action android:name="poynt.intent.action.CARD_READER_UNAVAILABLE" />
+                 <action android:name="poynt.intent.action.CUSTOMER_DETECTED" />
+                 <action android:name="poynt.intent.action.PRINTER_WARNING" />
+                 <action android:name="poynt.intent.action.PRINTER_ERROR" />
+                 <action android:name="poynt.intent.action.CATALOG_UPDATED" />
+                 <action android:name="poynt.intent.action.PRINT_ORDER_RECEIPT_ON_SAVE_ORDER" />
+                 <action android:name="poynt.intent.action.PRINT_ORDER_RECEIPT_ON_PAYMENT_COMPLETE" />
+                 <action android:name="poynt.intent.action.CANCEL_PREPAYMENT_CARD_SESSION" />
+                 <action android:name="poynt.intent.action.CATALOG_RECEIPT_PRINTING_PREFERENCES_UPDATED" />
+                 <action android:name="poynt.intent.action.SEARCH_PRODUCT" />
+                 <action android:name="poynt.intent.action.SEARCH_HELP" />
+                 <action android:name="poynt.intent.action.SEARCH_PRODUCT_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_ORDER" />
+                 <action android:name="poynt.intent.action.SEARCH_ORDER_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_STAY" />
+                 <action android:name="poynt.intent.action.SEARCH_STAY_CLOUD" />
+                 <action android:name="poynt.intent.action.SEARCH_STAY_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_TRANSACTION" />
+                 <action android:name="poynt.intent.action.SEARCH_TRANSACTION_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_CUSTOMER" />
+                 <action android:name="poynt.intent.action.SEARCH_CUSTOMER_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_CLOUD_RESULT" />
+                 <action android:name="poynt.intent.action.SEARCH_CLOUD" />
+                 <action android:name="poynt.intent.action.SEARCH_EVERYTHING_ALL" />
+                 <action android:name="poynt.intent.action.SEARCH_RESULT_ALL_SERVICES" />
+                 <action android:name="poynt.intent.action.SHOW_TXN_BY_CUSTOMER" />
+                 <action android:name="poynt.intent.action.GO_TO_TXN_DETAILS" />
+                 <action android:name="poynt.intent.action.GO_TO_ORDER_DETAILS" />
+                 <action android:name="poynt.intent.action.GO_TO_STAY_DETAILS" />
+                 <action android:name="poynt.intent.action.ADD_PRODUCT_TO_CART" />
+                 <action android:name="poynt.intent.action.REMOVE_PRODUCT_FROM_CART" />
+                 <action android:name="poynt.intent.action.CHARGE" />
+                 <action android:name="poynt.intent.action.CANCEL_CHARGE" />
+                 <action android:name="poynt.intent.action.ADD_ORDER_DISCOUNT" />
+                 <action android:name="poynt.intent.action.ADD_ITEM_DISCOUNT" />
+                 <action android:name="poynt.intent.action.NOTIFY_ORDER_READY" />
+                 <action android:name="poynt.intent.action.OPEN_ORDER_COUNT" />
+                 <action android:name="poynt.intent.action.MainActivity" />
+                 <action android:name="poynt.intent.action.NOTIFY_ORDER_READY_IN_10MINS" />
+                 <action android:name="poynt.intent.action.NOTIFY_ORDER_READY_IN_20MINS" />
+                 <action android:name="poynt.intent.action.USB_DEVICE_ATTACHED" />
+
+
+                 <action android:name="poynt.intent.action.NEW_STAY_CREATED" />
+                 <action android:name="STAY_ID" />
+                 <action android:name="poynt.intent.action.VIEW_HELP" />
+                 <action android:name="poynt.intent.action.ACTION_FEEDBACK_FORM" />
+                 <action android:name="poynt.intent.action.START_VNC" />
+                 <action android:name="poynt.intent.action.LIVE_SUPPORT" />
+                 <action android:name="poynt.intent.action.REQUEST_TECHNICIAN" />
+                 <action android:name="poynt.intent.action.VIEW_KNOWLEDGEBASE_ARTICLES" />
+                 <action android:name="poynt.intent.action.VIEW_REPORTS" />
+                 <action android:name="poynt.intent.action.TERMINAL" />
+                 <action android:name="poynt.intent.action.REGISTER" />
+                 <action android:name="poynt.intent.action.HELP" />
+                 <action android:name="co.poynt.help" />
+                 <action android:name="co.poynt.help.MainActivity" />
+                 <action android:name="android.intent.action.MAIN" />
+                 <action android:name="poynt.intent.action.SETTLEMENTS" />
+                 <action android:name="poynt.intent.action.VIEW_BATCH_HISTORY" />
+                 <action android:name="RETURN_TO_APP" />
+                 <action android:name="poynt.settings.BUSINESS" />
+                 <action android:name="poynt.settings.BUSINESS_USERS" />
+                 <action android:name="poynt.settings.PAYMENT" />
+                 <action android:name="poynt.intent.action.TERMINAL_ACTIVATED" />
+                 <action android:name="poynt.intent.action.CLOUD_MESSAGE_RECEIVED" />
+                 <action android:name="poynt.intent.action.WEBSOCKET_RECONNECT" />
+                 <action android:name="poynt.intent.action.WEBSOCKET_HARD_RESET" />
+                 <action android:name="poynt.intent.action.WEBSOCKET_STATUS" />
+                 <action android:name="poynt.intent.action.WEBSOCKET_BROADCAST_STATE" />
+                 <action android:name="WEBSOCKET_STATUS" />
+                 <action android:name="WEBSOCKET_ENDPOINT" />
+                 <action android:name="poynt.category.CLOUD_MESSAGE" />
+                 <action android:name="poynt.intent.action.COLLECT_PAYMENT" />
+                 <action android:name="poynt.intent.action.DISPLAY_PAYMENT" />
+                 <action android:name="poynt.intent.action.DISPLAY_OFFLINE_TRANSACTIONS" />
+                 <action android:name="poynt.intent.action.COLLECT_MULTI_TENDER_PAYMENT" />
+                 <action android:name="poynt.intent.action.COLLECT_PAYMENT_RESULT" />
+                 <action android:name="poynt.intent.action.CHECK_CARD_RESULT" />
+                 <action android:name="poynt.intent.action.BALANCE_INQUIRY" />
+                 <action android:name="poynt.intent.action.PROCESS_LOYALTY" />
+                 <action android:name="poynt.intent.action.PROCESS_LOYALTY_RESULT" />
+                 <action android:name="poynt.intent.action.PAYMENT_CANCELED" />
+                 <action android:name="poynt.intent.action.SETTLEMENT_REQUEST_ACCEPTED" />
+                 <action android:name="poynt.intent.action.SETTLEMENT_REQUEST_FAILED" />
+    <!--New Order  -->
+                <action android:name= "poynt.intent.action.VIEW_ORDERS"/>
+                <action android:name= "poynt.intent.action.NEW_ORDER_CREATED"/>
+                <action android:name= "poynt.intent.action.ORDER_CANCELED"/>
+                <action android:name= "poynt.intent.action.ORDER_ABORTED"/>
+                <action android:name= "poynt.intent.action.ORDER_UPDATED"/>
+                <action android:name= "poynt.intent.action.ORDER_ITEM_ADDED"/>
+                <action android:name= "poynt.intent.action.ORDER_ITEM_REMOVED"/>
+                <action android:name=  "poynt.intent.action.ORDER_ITEM_UPDATED"/>
+                <action android:name= "poynt.intent.action.ORDER_FULFILLED"/>
+                <action android:name= "poynt.intent.action.ORDER_CLOSED"/>
+
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".MapperAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibilityservice" />
+        </service>
+        <service
+            android:name=".services.SampleLoyaltyService"
+            android:enabled="true"
+            android:exported="true">
+
+            <!-- REQUIRED intent filter -->
+            <intent-filter>
+                <action android:name="co.poynt.os.services.v1.IPoyntLoyaltyService" />
+            </intent-filter>
+
+            <!-- REQUIRED to provide the location of the capability config file -->
+            <meta-data
+                android:name="co.poynt.os.service.capability"
+                android:resource="@xml/loyalty_capability" />
+            <!-- Optional: Provide a logo that will appear on screen (not implemented yet) -->
+            <meta-data
+                android:name="co.poynt.os.service.logo"
+                android:resource="@mipmap/ic_launcher" />
+        </service>
+        <service
+            android:name=".services.NetworkIntentService"
+            android:exported="false" />
+
+        <activity
+            android:name=".activities.PhoneCaptureSecondScreen"
+            android:excludeFromRecents="true"
+            android:theme="@style/ThemeNoActionBar"
+            android:label="@string/title_activity_phone_capture_second_screen"
+            ></activity>
+    </application>
+
+</manifest>
