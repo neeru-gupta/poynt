@@ -14,9 +14,11 @@
 4) Click on File Menu then New -> Import Project.
 5) Select given project PoyntDemo from your local directory and press OK.
 6) The project will download gradle and necessary files to compile  project .
-7) When project successful import .Click on build menu  -> build apk.
+7) Once project successfully import, click on build menu  -> build apk.
 8) After building successful apk at the bottom of screen its shows  (APK Explorer Window) 
 9) Open APK Explorer that having apk file.
+10. OOB, generated apk(`app-debug.apk`) get generates inside project folder at following path: poyntdemo/app/build/outputs/apk
+
 
 # Run APK By Command 
 
@@ -24,9 +26,28 @@
 
   a) get SDK path File->Project Structure-> SDK Location  
   b) click terminal window at bottom of screen in android studio.
-  c) go to platform-tools path of SDK (e.g:  `cd C:\Users\AppData\Local\Android\Sdk\platform-tools\` )
-  d) execute following command : `adb install path_of_apk`
-  		e.g  `adb install c:\myfolder\poyntdemo.apk`
+  c) go to generated apk path (e.g:  `cd /poyntdemo/app/build/outputs/apk` )
+  d) execute following command : `adb install app/build/outputs/apk/app-debug.apk`
+  		e.g  
+
+  		`$ adb install app/build/outputs/apk/app-debug.apk
+
+		app/build/outputs/apk/app-debug.apk: 1 file pushed. 6.9 MB/s (3873910 bytes in 0.536s)
+        		pkg: /data/local/tmp/app-debug.apk
+		Success
+		$ `
+
+
+ e) If apk is already install first unstall it using following command from terminal: `adb uninstall com.renovite.transactionidmapper`
+			e.g:
+
+		`$ adb uninstall com.renovite.transactionidmapper
+		Success
+		$ `
+
+
+
+
 
 
 # Run APK By Directly from Android studio menu option:
