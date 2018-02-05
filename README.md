@@ -9,7 +9,7 @@
 
 
 1) Install Android Studio with SDK form here : https://developer.android.com/studio/index.html3
-2) Clone the repo and save it local directory
+2) Clone the repository and save it local directory and extract it at some location.
 3) Open Android Studio
 4) Click on File Menu then New -> Import Project.
 5) Select given project PoyntDemo from your local directory and press OK.
@@ -38,12 +38,19 @@
 		$
 
 
- e) If apk is already install first unstall it using following command from terminal: `adb uninstall com.renovite.transactionidmapper`
+ e) If apk is already install first unstall it using following command from terminal: `adb uninstall transactionidmapper_path`
 			e.g:
 
 		$ adb uninstall com.renovite.transactionidmapper
 		Success
 		$
+
+
+Note: transactionidmapper_path path can be found from app/manifests/AndroidManifest.xml.For example, see below 'package' value:
+
+`<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.renovite.transactionidmapper">`
+  
 
 
 # Run APK By Directly from Android studio menu option:
