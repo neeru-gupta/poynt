@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_gravity="bottom" android:orientation="horizontal" android:id="@+id/footer_layout" android:background="@color/darkblue" android:paddingLeft="12.0dip" android:paddingTop="12.0dip" android:paddingRight="12.0dip" android:paddingBottom="2dip" android:layout_width="fill_parent" android:layout_height="48.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:poynt="http://schemas.android.com/apk/res-auto">
+    <ImageView android:id="@+id/footerLogo" android:layout_width="107px" android:layout_height="wrap_content" android:src="@drawable/bottom_logo" android:layout_alignParentRight="true" android:layout_centerVertical="true"  android:maxWidth="107px"/>
+    <TextView android:textColor="@color/white" android:textStyle="bold|italic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="8.0dip" android:text="@string/poweredBy" android:layout_toLeftOf="@+id/footerLogo" android:layout_centerVertical="true" />
+</RelativeLayout>
