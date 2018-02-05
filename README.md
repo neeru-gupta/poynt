@@ -22,7 +22,7 @@
 
 # Run APK By Command 
 
-(Connect to Poynt Device to computer or laptop by USB and allow USB debugging on device screen)
+(Connect Poynt Device to computer or laptop via USB and allow USB debugging on device screen once shown.)
 
   a) get SDK path File->Project Structure-> SDK Location  
   b) click terminal window at bottom of screen in android studio.
@@ -30,29 +30,27 @@
   d) execute following command : `adb install app/build/outputs/apk/app-debug.apk`
   		e.g  
 
-  		`$ adb install app/build/outputs/apk/app-debug.apk
+  		$ adb install app/build/outputs/apk/app-debug.apk
 
 		app/build/outputs/apk/app-debug.apk: 1 file pushed. 6.9 MB/s (3873910 bytes in 0.536s)
         		pkg: /data/local/tmp/app-debug.apk
 		Success
-		$ `
+		$
 
 
  e) If apk is already install first unstall it using following command from terminal: `adb uninstall com.renovite.transactionidmapper`
 			e.g:
 
-		`$ adb uninstall com.renovite.transactionidmapper
+		$ adb uninstall com.renovite.transactionidmapper
 		Success
-		$ `
-
-
-
-
+		$
 
 
 # Run APK By Directly from Android studio menu option:
 
-    a) Run->Run APP 
+    a) Connect Poynt Device to computer or laptop via USB and allow USB debugging on device screen once shown.
+    b) go to run menu in Android studio: select Run APP option.
+    c) Select the poynt terminal(Select deployment Target window) item from android displayed window and click 'ok' button. 
 
 
 
