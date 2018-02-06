@@ -369,7 +369,10 @@ public class Utils {
             paymentMethod.getCard().setIssuer(getAttributeValueReplaceNull2Empty(transaction.getFundingSource().getCard().getIssuer()));
             paymentMethod.getCard().setLastFour(getAttributeValueReplaceNull2Empty(transaction.getFundingSource().getCard().getNumberLast4()));
             paymentMethod.getCard().setCardType(getAttributeValueReplaceNull2Empty(transaction.getFundingSource().getCard().getType().toString()));
-            paymentMethod.getCard().setExpirationDate(getAttributeValueReplaceNull2Empty(String.valueOf(transaction.getFundingSource().getCard().getExpirationMonth())) + getAttributeValueReplaceNull2Empty(String.valueOf((Math.abs(transaction.getFundingSource().getCard().getExpirationYear()) % 10))));
+            paymentMethod.getCard().setExpirationDate(
+
+                    getAttributeValueReplaceNull2Empty(String.valueOf(transaction.getFundingSource().getCard().getExpirationMonth()))
+                            + getAttributeValueReplaceNull2Empty(String.valueOf((Math.abs(transaction.getFundingSource().getCard().getExpirationYear()) % 100))));
             paymentMethod.setPaymentMethod(Constants.CARD.toLowerCase());
             paymentMethod.setPaymentMethodType(Constants.CARD.toUpperCase());
         }
