@@ -3,9 +3,13 @@ package com.renovite.transactionidmapper.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.renovite.transactionidmapper.database.DbShareprefence;
+import com.renovite.transactionidmapper.model.demo.MultipleResources;
 import com.renovite.transactionidmapper.utils.Constants;
+import com.renovite.transactionidmapper.utils.UnsafeOkHttpClient;
 import com.renovite.transactionidmapper.utils.Utils;
 
 import java.io.BufferedReader;
@@ -16,7 +20,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.renovite.transactionidmapper.utils.Utils.readStream;
 
@@ -28,6 +41,7 @@ import static com.renovite.transactionidmapper.utils.Utils.readStream;
  * helper methods.
  */
 public class NetworkIntentService extends IntentService {
+    private APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
 
 
     public NetworkIntentService() {
@@ -44,44 +58,53 @@ public class NetworkIntentService extends IntentService {
               // processRequest(intent.getStringExtra(Constants.JSON_DATA));
                 processRequest(intent.getStringExtra(Constants.JSON_DATA));
         }
+        processRequest("{\"data\":\"hello\"}");
     }
 
-
     private  void processRequest(String json) {
-        try {
-            URL obj = new URL(DbShareprefence.getInstance().getHostURL(this.getApplicationContext()));
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            con.setRequestMethod(Constants.HTTP_METHOD);
-            addHeader(con);
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
-            os.write(json.getBytes());
-            os.flush();
-            os.close();
-            int responseCode = con.getResponseCode();
-            System.out.println("POST Response Code :: " + responseCode);
+        Log.d("RUNTIME","*** Inside calling of the API");
+        APIClient.getClient();
+        Log.d("RUNTIME*** Client: ", String.valueOf(APIClient.getClient()));
 
-            if (responseCode == HttpURLConnection.HTTP_OK||responseCode==HttpURLConnection.HTTP_CREATED) { //success
-                BufferedReader in = new BufferedReader(new InputStreamReader(
-                        con.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
+        /**
+         GET List Resources
+         **/
+        Call<MultipleResources> call = apiInterface.doGetListResources();
+        call.enqueue(new Callback<MultipleResources>() {
+            @Override
+            public void onResponse(Call<MultipleResources> call, Response<MultipleResources> response) {
 
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
+
+                Log.d("TAG",response.code()+"");
+
+                String displayResponse = "";
+
+                MultipleResources resource = response.body();
+                Integer text = resource.page;
+                Integer total = resource.total;
+                Integer totalPages = resource.totalPages;
+                List<MultipleResources.Datum> datumList = resource.data;
+
+                displayResponse += text + " Page\n" + total + " Total\n" + totalPages + " Total Pages\n";
+
+                for (MultipleResources.Datum datum : datumList) {
+                    displayResponse += datum.id + " " + datum.name + " " + datum.pantoneValue + " " + datum.year + "\n";
                 }
-                in.close();
 
-                // print result
-                System.out.println(response.toString());
-            } else {
-                System.out.println("POST request not worked");
+                Log.d("TAG",displayResponse);
+
             }
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-            return;
-        }
+
+            @Override
+            public void onFailure(Call<MultipleResources> call, Throwable t)
+            {
+                t.printStackTrace();
+                call.cancel();
+            }
+        });
+
+
+        System.out.println("*** Completed the call");
     }
 
 

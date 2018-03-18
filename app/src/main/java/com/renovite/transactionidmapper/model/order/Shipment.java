@@ -1,0 +1,282 @@
+
+package com.renovite.transactionidmapper.model.order;
+
+import java.io.Serializable;
+import java.util.List;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcelable.Creator;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+public class Shipment implements Serializable, Parcelable
+{
+
+    @SerializedName("carrier")
+    @Expose
+    private String carrier;
+    @SerializedName("destination")
+    @Expose
+    private Destination destination;
+    @SerializedName("expectedFrom")
+    @Expose
+    private String expectedFrom;
+    @SerializedName("expectedUntil")
+    @Expose
+    private String expectedUntil;
+    @SerializedName("origin")
+    @Expose
+    private Origin origin;
+    @SerializedName("shipmentItems")
+    @Expose
+    private List<ShipmentItem> shipmentItems = null;
+    @SerializedName("shipmentRef")
+    @Expose
+    private String shipmentRef;
+    @SerializedName("shippingMethod")
+    @Expose
+    private String shippingMethod;
+    @SerializedName("trackingNumber")
+    @Expose
+    private String trackingNumber;
+    @SerializedName("trackingUrl")
+    @Expose
+    private TrackingUrl trackingUrl;
+    public final static Creator<Shipment> CREATOR = new Creator<Shipment>() {
+
+
+        @SuppressWarnings({
+            "unchecked"
+        })
+        public Shipment createFromParcel(Parcel in) {
+            return new Shipment(in);
+        }
+
+        public Shipment[] newArray(int size) {
+            return (new Shipment[size]);
+        }
+
+    }
+    ;
+    private final static long serialVersionUID = 1141096771071643153L;
+
+    protected Shipment(Parcel in) {
+        this.carrier = ((String) in.readValue((String.class.getClassLoader())));
+        this.destination = ((Destination) in.readValue((Destination.class.getClassLoader())));
+        this.expectedFrom = ((String) in.readValue((String.class.getClassLoader())));
+        this.expectedUntil = ((String) in.readValue((String.class.getClassLoader())));
+        this.origin = ((Origin) in.readValue((Origin.class.getClassLoader())));
+        in.readList(this.shipmentItems, (com.renovite.transactionidmapper.model.order.ShipmentItem.class.getClassLoader()));
+        this.shipmentRef = ((String) in.readValue((String.class.getClassLoader())));
+        this.shippingMethod = ((String) in.readValue((String.class.getClassLoader())));
+        this.trackingNumber = ((String) in.readValue((String.class.getClassLoader())));
+        this.trackingUrl = ((TrackingUrl) in.readValue((TrackingUrl.class.getClassLoader())));
+    }
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Shipment() {
+    }
+
+    /**
+     * 
+     * @param shipmentItems
+     * @param trackingUrl
+     * @param shipmentRef
+     * @param trackingNumber
+     * @param origin
+     * @param carrier
+     * @param shippingMethod
+     * @param expectedUntil
+     * @param expectedFrom
+     * @param destination
+     */
+    public Shipment(String carrier, Destination destination, String expectedFrom, String expectedUntil, Origin origin, List<ShipmentItem> shipmentItems, String shipmentRef, String shippingMethod, String trackingNumber, TrackingUrl trackingUrl) {
+        super();
+        this.carrier = carrier;
+        this.destination = destination;
+        this.expectedFrom = expectedFrom;
+        this.expectedUntil = expectedUntil;
+        this.origin = origin;
+        this.shipmentItems = shipmentItems;
+        this.shipmentRef = shipmentRef;
+        this.shippingMethod = shippingMethod;
+        this.trackingNumber = trackingNumber;
+        this.trackingUrl = trackingUrl;
+    }
+
+    public String getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
+
+    public Shipment withCarrier(String carrier) {
+        this.carrier = carrier;
+        return this;
+    }
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
+
+    public Shipment withDestination(Destination destination) {
+        this.destination = destination;
+        return this;
+    }
+
+    public String getExpectedFrom() {
+        return expectedFrom;
+    }
+
+    public void setExpectedFrom(String expectedFrom) {
+        this.expectedFrom = expectedFrom;
+    }
+
+    public Shipment withExpectedFrom(String expectedFrom) {
+        this.expectedFrom = expectedFrom;
+        return this;
+    }
+
+    public String getExpectedUntil() {
+        return expectedUntil;
+    }
+
+    public void setExpectedUntil(String expectedUntil) {
+        this.expectedUntil = expectedUntil;
+    }
+
+    public Shipment withExpectedUntil(String expectedUntil) {
+        this.expectedUntil = expectedUntil;
+        return this;
+    }
+
+    public Origin getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Origin origin) {
+        this.origin = origin;
+    }
+
+    public Shipment withOrigin(Origin origin) {
+        this.origin = origin;
+        return this;
+    }
+
+    public List<ShipmentItem> getShipmentItems() {
+        return shipmentItems;
+    }
+
+    public void setShipmentItems(List<ShipmentItem> shipmentItems) {
+        this.shipmentItems = shipmentItems;
+    }
+
+    public Shipment withShipmentItems(List<ShipmentItem> shipmentItems) {
+        this.shipmentItems = shipmentItems;
+        return this;
+    }
+
+    public String getShipmentRef() {
+        return shipmentRef;
+    }
+
+    public void setShipmentRef(String shipmentRef) {
+        this.shipmentRef = shipmentRef;
+    }
+
+    public Shipment withShipmentRef(String shipmentRef) {
+        this.shipmentRef = shipmentRef;
+        return this;
+    }
+
+    public String getShippingMethod() {
+        return shippingMethod;
+    }
+
+    public void setShippingMethod(String shippingMethod) {
+        this.shippingMethod = shippingMethod;
+    }
+
+    public Shipment withShippingMethod(String shippingMethod) {
+        this.shippingMethod = shippingMethod;
+        return this;
+    }
+
+    public String getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
+
+    public Shipment withTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+        return this;
+    }
+
+    public TrackingUrl getTrackingUrl() {
+        return trackingUrl;
+    }
+
+    public void setTrackingUrl(TrackingUrl trackingUrl) {
+        this.trackingUrl = trackingUrl;
+    }
+
+    public Shipment withTrackingUrl(TrackingUrl trackingUrl) {
+        this.trackingUrl = trackingUrl;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("carrier", carrier).append("destination", destination).append("expectedFrom", expectedFrom).append("expectedUntil", expectedUntil).append("origin", origin).append("shipmentItems", shipmentItems).append("shipmentRef", shipmentRef).append("shippingMethod", shippingMethod).append("trackingNumber", trackingNumber).append("trackingUrl", trackingUrl).toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(shipmentItems).append(trackingUrl).append(shipmentRef).append(trackingNumber).append(origin).append(carrier).append(shippingMethod).append(expectedUntil).append(expectedFrom).append(destination).toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof Shipment) == false) {
+            return false;
+        }
+        Shipment rhs = ((Shipment) other);
+        return new EqualsBuilder().append(shipmentItems, rhs.shipmentItems).append(trackingUrl, rhs.trackingUrl).append(shipmentRef, rhs.shipmentRef).append(trackingNumber, rhs.trackingNumber).append(origin, rhs.origin).append(carrier, rhs.carrier).append(shippingMethod, rhs.shippingMethod).append(expectedUntil, rhs.expectedUntil).append(expectedFrom, rhs.expectedFrom).append(destination, rhs.destination).isEquals();
+    }
+
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(carrier);
+        dest.writeValue(destination);
+        dest.writeValue(expectedFrom);
+        dest.writeValue(expectedUntil);
+        dest.writeValue(origin);
+        dest.writeList(shipmentItems);
+        dest.writeValue(shipmentRef);
+        dest.writeValue(shippingMethod);
+        dest.writeValue(trackingNumber);
+        dest.writeValue(trackingUrl);
+    }
+
+    public int describeContents() {
+        return  0;
+    }
+
+}

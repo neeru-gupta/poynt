@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TransactionIDMapper.iml" filepath="$PROJECT_DIR$/TransactionIDMapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/poyntdemo.iml" filepath="$PROJECT_DIR$/poyntdemo.iml" />
     </modules>
   </component>
 </project>
