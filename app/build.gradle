@@ -43,6 +43,7 @@ dependencies {
     })
     // Gson dependency
     // JWT dependencies - if you want to parse JWTs
+    //noinspection GradleCompatible
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'co.poynt.api:android-api-model:1.2.27'
@@ -59,10 +60,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'org.slf4j:slf4j-android:1.7.7'
-    compile 'com.madgag.spongycastle:core:1.54.0.0'
-    compile 'com.madgag.spongycastle:prov:1.54.0.0'
-    compile 'com.madgag.spongycastle:pkix:1.54.0.0'
-    compile 'com.madgag.spongycastle:pg:1.54.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
