@@ -3,6 +3,7 @@ package com.renovite.transactionidmapper.utils;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -25,6 +26,7 @@ public class UnsafeOkHttpClient {
     private static final String SHA256_PIN = "sha256/5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=";
 
     public static OkHttpClient getHttpClient() {
+        //VJ: Check if you need pinning in prod servers
         CertificatePinner certificatePinner = new CertificatePinner.Builder()
                 .add(hostname, SHA256_PIN)
                 .add(hostname, SHA1_PIN)
@@ -34,10 +36,7 @@ public class UnsafeOkHttpClient {
                 .tlsVersions(TlsVersion.TLS_1_2)
                 .supportsTlsExtensions(true)
                 .cipherSuites(
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
-                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+                        CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
 
                 )
                 .build();
@@ -51,7 +50,7 @@ public class UnsafeOkHttpClient {
                     .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                     .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                     //.connectionSpecs(Collections.singletonList(spec)) // Only needed in some cases
-                    .certificatePinner(certificatePinner)
+                    //.certificatePinner(certificatePinner)
                     .hostnameVerifier(new HostnameVerifier() {
                         @Override
                         public boolean verify(String hostname, SSLSession session) {

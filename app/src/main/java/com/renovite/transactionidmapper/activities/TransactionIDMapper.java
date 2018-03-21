@@ -90,10 +90,10 @@ public class TransactionIDMapper extends AppCompatActivity implements DlgInterfa
                 Request request = new Request.Builder()
                         //THE below are URL's we have CIPHER incompatability
                         .url("https://apigateway.poc.wrsops.net/v1/oauth2/auth")
+                        //.url("https://api.staging.onemarketnetwork.com/v1/oauth2/auth")
+                        //.url("https://api.sandbox.onemarketnetwork.com/v1/oauth2/auth")
+                        //.url("https://api.onemarketnetwork.com/v1/oauth2/auth")
                         //.url("https://account.poc.wrsops.net/v1/oauth2/auth")
-                        //.url("https://api.staging.onemarketnetwork.com/")
-                        //.url("https://api.sandbox.onemarketnetwork.com/")
-                        //.url("https://api.onemarketnetwork.com/")
 
                         //THE below are URL's we can make TLSv1.2 call. Even other channels are open TSLV1, TSLv1.1
                         //.url("https://account.onemarketnetwork.com")
